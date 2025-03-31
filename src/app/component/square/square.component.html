@@ -3,6 +3,10 @@
   [class.disabled]="!enabled"
   (click)="handleClick()"
   [disabled]="!enabled"
+  [ngClass]="{
+    redColor: text === 'X',
+    purpleColor: text === 'O'
+  }"
 >
   {{ text }}
 </button>

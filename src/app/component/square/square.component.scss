@@ -1,8 +1,8 @@
 .square {
   width: 80px;
   height: 80px;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 48px;
+  font-weight: 900;
   border: 2px solid #333;
   background-color: #fff;
   cursor: pointer;
@@ -16,4 +16,12 @@
 .square:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.redColor {
+  color: red; /* Set text color for 'X' */
+}
+
+.purpleColor {
+  color: purple; /* Set text color for 'O' */
 }
