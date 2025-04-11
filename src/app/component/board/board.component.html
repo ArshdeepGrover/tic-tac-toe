@@ -1,53 +1,40 @@
-<h1 class="title">Tic Tac Toe</h1>
-
+<!-- Game Section -->
 <div class="game-container">
+  <h1 class="title">Tic Tac Toe</h1>
+
   <ng-container *ngIf="!hasGameFinished">
     <p class="info">
-      Next player: <span class="player-highlight">{{ currentPlayer }}</span>
+      Next player:
+      <span class="player-highlight">{{ getCurrentPlayerName() }}</span>
     </p>
   </ng-container>
 
   <ng-container *ngIf="hasGameFinished">
-    <p class="winner">🎉 Player {{ currentPlayer }} won! 🎉</p>
+    <p class="winner">🎉 {{ getCurrentPlayerName() }} won! 🎉</p>
   </ng-container>
 
   <ng-container *ngIf="finishedAsDraw">
     <p class="draw">🤝 That's a draw! 🤝</p>
   </ng-container>
 
-  <button class="restart-btn" (click)="restart()">🔄 Restart Game</button>
+  <div class="controls">
+    <button class="restart-btn" (click)="restart()">🔄 Restart Game</button>
+    <!-- <button class="change-names-btn" (click)="changeNames()">✏️ Change Names</button> -->
+  </div>
 
-  <!-- Game Board -->
   <div class="board">
     <app-square
       *ngFor="let num of [0, 1, 2, 3, 4, 5, 6, 7, 8]"
       [squareNumber]="num"
       (onSquareClick)="handleSquareClick(num)"
-    >
-    </app-square>
+    ></app-square>
   </div>
+</div>
 
-  <!-- Player Movements -->
-  <h2 class="movements-title">Movements</h2>
-  <div class="history-container">
-    <div class="player-history">
-      <strong class="player-x">Player X</strong>
-      <ul>
-        <li *ngFor="let movement of getMovementsFromPlayer('X')">
-          <strong>#{{ movement.player }}</strong> clicked in square
-          <strong>#{{ movement.squareNumber }}</strong>
-        </li>
-      </ul>
-    </div>
-
-    <div class="player-history">
-      <strong class="player-o">Player O</strong>
-      <ul>
-        <li *ngFor="let movement of getMovementsFromPlayer('O')">
-          <strong>#{{ movement.player }}</strong> clicked in square
-          <strong>#{{ movement.squareNumber }}</strong>
-        </li>
-      </ul>
-    </div>
-  </div>
+<!-- Optional Name Entry Section -->
+<div class="name-entry" *ngIf="!playersSet">
+  <h3>Enter Player Names (optional)</h3>
+  <input type="text" [(ngModel)]="playerXName" placeholder="Player X Name" />
+  <input type="text" [(ngModel)]="playerOName" placeholder="Player O Name" />
+  <button (click)="startGame()">Set Names</button>
 </div>

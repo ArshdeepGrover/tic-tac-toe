@@ -15,6 +15,10 @@ export class BoardComponent {
   hasGameFinished: boolean = false;
   finishedAsDraw: boolean = false;
 
+  playerXName: string = '';
+  playerOName: string = '';
+  playersSet: boolean = false;
+
   winningCombinations = [
     [0, 1, 2],
     [3, 4, 5],
@@ -61,6 +65,24 @@ export class BoardComponent {
     return this.movementHistory.filter(
       (movement) => movement.player === playerName
     );
+  }
+
+  startGame() {
+    this.playersSet = true;
+  }
+
+  getCurrentPlayerName(): string {
+    if (!this.playersSet) {
+      return this.currentPlayer === 'X' ? 'Player X' : 'Player O';
+    }
+    return this.currentPlayer === 'X'
+      ? this.playerXName || 'Player X'
+      : this.playerOName || 'Player O';
+  }
+
+  changeNames() {
+    this.playersSet = false;
+    this.restart(); // reset board
   }
 
   private getSquare(squareNumber: number): SquareComponent {
